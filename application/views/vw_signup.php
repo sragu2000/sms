@@ -33,7 +33,7 @@
         <!-- signup start -->
         <br>
         <center>
-            <img src="<?php echo base_url('images/new-user.png');?>" height="150">
+            <!-- <img src="<?php //echo base_url('images/new-user.png');?>" height="150"> -->
         </center><br>
         <form id="signup" method="post">
             <div class="card border-dark">
@@ -43,18 +43,17 @@
                 </div>
                 <!-- card body -->
                 <div class="card-body">
-                    <input type="text" class="form-control-lg form-control rounded-3" required placeholder="User Name" id="spusername"> &nbsp;
-                    <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Index Number" id="spindnum">&nbsp;
-                    <select name="corurse" required id="spcoursename" class="form-control-lg form-control rounded-3">
-                        <option value="" disabled selected>Select your Course</option>
-                        <option value="IT">IT</option>
-                        <option value="ITM">ITM</option>
-                    </select>&nbsp;
-                    <input type="email" class="form-control-lg form-control rounded-3" required placeholder="Email"
-                        id="spemail">&nbsp;
-                    <input type="password" class="form-control-lg form-control rounded-3" required
-                        placeholder="Password" id="sppassword">&nbsp;
-
+                    <input type="text" class="form-control-lg form-control rounded-3" required placeholder="First Name" id="fname"> &nbsp;
+                    <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Last Name" id="lname"> &nbsp;
+                    <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Address" id="address"> &nbsp;
+                    <input type="email" class="form-control-lg form-control rounded-3" required placeholder="Email" id="email"> &nbsp;
+                    <input type="number" class="form-control-lg form-control rounded-3" required placeholder="Phone Number" id="tpno"> &nbsp;
+                    <div class="row">
+                        <div class="col-md-4"><div class="form-control form-control-lg">Date of Birth</div></div>
+                        <div class="col-md-8"><input type="date" class="form-control-lg form-control rounded-3" required placeholder="Date of Birth" id="dob"> &nbsp;</div>
+                    </div>
+                    <input type="password" class="form-control-lg form-control rounded-3" required placeholder="Password" id="password">&nbsp;
+                    
                     <div class="row">
                         <div class="col-12">
                             <div class="form-control form-control-lg">
@@ -76,21 +75,21 @@
         </form>
         <!-- signup end -->
         <br>
-        <a href="<?php echo base_url('authenticate/login');?>" class="btn form-control btn-lg btn-outline-primary">Login
-            here</a>
+        <a href="<?php echo base_url('login');?>" class="btn form-control btn-lg btn-outline-primary">Loginhere</a>
         <br><br>
     </div>
     <script>
-        
         $(document).on("submit","#signup",(e)=>{
             e.preventDefault();
             var toServer=new FormData();
-            toServer.append('username',$("#spusername").val());
-            toServer.append('indnum',$("#spindnum").val());
-            toServer.append('course',$("#spcoursename").val());
-            toServer.append('email',$("#spemail").val());
-            toServer.append('password',$("#sppassword").val());
-            fetch("<?php echo base_url('authenticate/signupuser');?>",{
+            toServer.append('fname',$("#fname").val());
+            toServer.append('lname',$("#lname").val());
+            toServer.append('address',$("#address").val());
+            toServer.append('tpno',$("#tpno").val());
+            toServer.append('email',$("#email").val());
+            toServer.append('dob',$("#dob").val());
+            toServer.append('password',$("#password").val());
+            fetch("<?php echo base_url('signup/signupuser');?>",{
                 method:'POST',
                 body: toServer,
                 mode: 'no-cors',
@@ -106,20 +105,11 @@
                 }
             })
             .then(data => {
-                if(data.result==true){
-                    alert("Signup Success. You can Login Now");
-                    if(data.url==null){
-                        location.href="<?php echo base_url('dashboard'); ?>";
-                    }else{
-                        location.href=data.url;
-                    }
-                }else{
-                    alert(data.message);
-                }
+                alert(data.message);
             })
             .catch((e) => {
                 console.log(e);
-                alert("Reloading");
+                alert(e);
             });
         })
     </script>

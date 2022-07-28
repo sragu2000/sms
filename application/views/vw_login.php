@@ -20,7 +20,7 @@
 <body>
     <div class="container">
         <br>
-        <center><img src="<?php echo base_url("images/logo.png");?>" height="150"></center><br>
+        <!-- <center><img src="<?php //echo base_url("images/logo.png");?>" height="150"></center><br> -->
         <!-- login Start -->
         <div id="result"></div>
         <form id="loginForm" post>
@@ -49,7 +49,7 @@
             var toServer=new FormData();
             toServer.append('indnum',$("#indnum").val());
             toServer.append('password',$("#password").val());
-            fetch("<?php echo base_url('authenticate/usersignin');?>",{
+            fetch("<?php echo base_url('login/loginuser');?>",{
                 method:'POST',
                 body: toServer,
                 mode: 'no-cors',
@@ -59,7 +59,8 @@
                     return response.json();            
                 }
                 else {
-                    alert('Backend Error..!');window.location.reload();
+                    alert('Backend Error..!');
+                    window.location.reload();
                    
                 }
             })
@@ -68,22 +69,16 @@
                     document.getElementById("result").innerHTML="";
                     var htmltext=`<div class="alert alert-success" role="alert">${data.message}</div>`;
                     $("#result").append(htmltext);
-                    if(data.url==null){
-                        location.href="<?php echo base_url('dashboard'); ?>";
-                    }else{
-                        location.href=data.url;
-                    }
-                    
+                    location.href="<?php echo base_url('home'); ?>";  
                 }else{
                     document.getElementById("result").innerHTML="";
                     var htmltext=`<div class="alert alert-danger" role="alert">${data.message}</div>`;
                     $("#result").append(htmltext);
                 }
-                
             })
             .catch((e) => {
                 console.log(e);
-                alert("Reloading");
+                alert(e);
                 window.location.reload();
             });
         })
