@@ -29,8 +29,8 @@
             <div class="card-header form-control-lg"><strong><center>Login</center></strong></div>
             <!-- card body -->
             <div class="card-body">
-            <input type="mail" class="form-control-lg form-control rounded-3" required placeholder="Email" id="mail">&nbsp;
-            <input type="password" class="form-control-lg form-control rounded-3" required placeholder="Password" id="password">&nbsp;
+            <input type="mail" value="m@mail.com" class="form-control-lg form-control rounded-3" required placeholder="Email" id="mail">&nbsp;
+            <input type="password" value="123" class="form-control-lg form-control rounded-3" required placeholder="Password" id="password">&nbsp;
             <hr>
             <div class="row"> <!--Button Set-->
                 <div class="col-6"><button type="submit" class="btn btn-outline-success btn-lg form-control">Login</button></div>
@@ -39,8 +39,7 @@
             </div>  
         </div>
         </form><br>
-    <a href="<?php echo base_url('authenticate/forgotpassword');?>" id="forgot" class="btn btn-outline-warning btn-lg form-control">Forgot Password ? </a> <br><br>
-        <a href="<?php echo base_url('authenticate/signup');?>" class="btn form-control btn-lg btn-outline-primary">Signup here</a>
+        <a href="<?php echo base_url('signup');?>" class="btn form-control btn-lg btn-outline-primary">Signup here</a>
         <!-- Login End --><br><br>
     </div>
     <script>

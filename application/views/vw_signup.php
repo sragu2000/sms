@@ -45,7 +45,10 @@
                 <div class="card-body">
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="First Name" id="fname"> &nbsp;
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Last Name" id="lname"> &nbsp;
-                    <input type="number" max="13" min="1" class="form-control-lg form-control rounded-3" required placeholder="Grade" id="grade"> &nbsp;
+                    <select id="grade" class="form-control form-control-lg">
+                        <option value="" disabled selected>Select Your Grade</option>
+                    </select><p></p>
+                    
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Address" id="address"> &nbsp;
                     <input type="email" class="form-control-lg form-control rounded-3" required placeholder="Email" id="email"> &nbsp;
                     <input type="number" class="form-control-lg form-control rounded-3" required placeholder="Phone Number" id="tpno"> &nbsp;
@@ -80,6 +83,25 @@
         <br><br>
     </div>
     <script>
+        $(document).ready(()=>{
+            fetch("<?php echo base_url('general/getgrades') ?>",{method:'GET',mode: 'no-cors',cache: 'no-cache'})
+            .then(response => {
+                if (response.status == 200) {return response.json();}
+                else {console.log('Backend Error..!');console.log(response.text());}
+            })
+            .then(data => {
+                if (data.length>0) {
+                    data.forEach(function(item){
+                        var htmlText=`<option value="${item.id}">${item.grade}</option>`;
+                        $("#grade").append(htmlText);
+                    });
+                }else{
+                    alert("Grades not available.");
+                }
+            })
+            .catch(() => {console.log("Network connection error");});
+        });
+        
         $(document).on("submit","#signup",(e)=>{
             e.preventDefault();
             var toServer=new FormData();
@@ -102,8 +124,8 @@
                     console.log('response data', data);
                     return data;
                 }catch(err) {
-                    console.log('Error happened here!')
-                    console.error(err)
+                    console.log('Error happened here!');
+                    console.error(err);
                 }
             })
             .then(data => {
