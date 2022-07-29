@@ -8,9 +8,13 @@ class Mdl_signup extends CI_Model{
 		$arr["address"]=$this->input->post('address');
 		$arr["phonenum"]=$this->input->post('tpno');
 		$arr["email"]=$this->input->post('email');
+		$arr["grade"]=$this->input->post('grade');
 		$arr["dob"]=$this->input->post('dob');
 		$arr["password"]=password_hash($this->input->post('password'),PASSWORD_DEFAULT);
         $arr["role"]="student";
+        date_default_timezone_set("Asia/Colombo");
+        $date=date("Y-m-d");
+        $arr["regDate"]=$date;
         $arr["status"]="active";
         $email=$this->input->post('email');
 

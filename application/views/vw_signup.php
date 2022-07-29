@@ -45,6 +45,7 @@
                 <div class="card-body">
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="First Name" id="fname"> &nbsp;
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Last Name" id="lname"> &nbsp;
+                    <input type="number" max="13" min="1" class="form-control-lg form-control rounded-3" required placeholder="Grade" id="grade"> &nbsp;
                     <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Address" id="address"> &nbsp;
                     <input type="email" class="form-control-lg form-control rounded-3" required placeholder="Email" id="email"> &nbsp;
                     <input type="number" class="form-control-lg form-control rounded-3" required placeholder="Phone Number" id="tpno"> &nbsp;
@@ -85,6 +86,7 @@
             toServer.append('fname',$("#fname").val());
             toServer.append('lname',$("#lname").val());
             toServer.append('address',$("#address").val());
+            toServer.append('grade',$("#grade").val());
             toServer.append('tpno',$("#tpno").val());
             toServer.append('email',$("#email").val());
             toServer.append('dob',$("#dob").val());

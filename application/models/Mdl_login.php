@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_login extends CI_Model {
     public function checkuser(){
-        $indNum=$this->input->post('indnum');
+        $mail=$this->input->post('mail');
 		    $password=$this->input->post('password');
-        $sql=$this->db->query("SELECT * FROM studentdetails WHERE indexnumber='$indNum'");
+        $sql=$this->db->query("SELECT * FROM studentdetails WHERE email='$mail'");
         if($sql->num_rows()==1){
             $hpassw=$sql->first_row()->password;
             if(password_verify($password,$hpassw)){

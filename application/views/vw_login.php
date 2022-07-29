@@ -29,7 +29,7 @@
             <div class="card-header form-control-lg"><strong><center>Login</center></strong></div>
             <!-- card body -->
             <div class="card-body">
-            <input type="text" class="form-control-lg form-control rounded-3" required placeholder="Index Number" id="indnum">&nbsp;
+            <input type="mail" class="form-control-lg form-control rounded-3" required placeholder="Email" id="mail">&nbsp;
             <input type="password" class="form-control-lg form-control rounded-3" required placeholder="Password" id="password">&nbsp;
             <hr>
             <div class="row"> <!--Button Set-->
@@ -47,7 +47,7 @@
         $(document).on("submit","#loginForm",(e)=>{
         e.preventDefault();
             var toServer=new FormData();
-            toServer.append('indnum',$("#indnum").val());
+            toServer.append('mail',$("#mail").val());
             toServer.append('password',$("#password").val());
             fetch("<?php echo base_url('login/loginuser');?>",{
                 method:'POST',
