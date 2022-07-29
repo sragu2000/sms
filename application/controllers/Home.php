@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding");
 		parent::__construct();
 		$this->load->model('Mdl_login');
+		$this->load->model('Mdl_student');
 		if(! $this->Mdl_login->sessionCheck()){
 			redirect("login");
 		}
@@ -16,12 +17,26 @@ class Home extends CI_Controller {
 		$this->load->view('vw_header');
 		$this->load->view('vw_nav');
 		if($_SESSION["approle"]=="student"){
-			$this->load->view('vw_student_home');
+			$arr["indexnum"]=$_SESSION["stuindex"];
+			$this->load->view('vw_student_home',$arr);
 		}else if($_SESSION["approle"]=="admin"){
 			$this->load->view('vw_admin_home');
 		}else{
 			echo "Invalid User";
 		}
+		$this->load->view('vw_footer');
+	}
+
+	public function getPaymentHistory(){
+		echo $this->Mdl_student->getPreviousPayments();
+	}
+	public function getStudentDetails(){
+		echo $this->Mdl_student->getStudentDetails();
+	}
+	public function myaccount(){
+		$this->load->view('vw_header');
+		$this->load->view('vw_nav');
+		$this->load->view('vw_myaccount');
 		$this->load->view('vw_footer');
 	}
 }

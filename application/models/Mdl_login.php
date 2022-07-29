@@ -10,7 +10,8 @@ class Mdl_login extends CI_Model {
             $hpassw=$sql->first_row()->password;
             if(password_verify($password,$hpassw)){
                 $userRole=$sql->first_row()->role;
-                return array("message"=>"Login Success","result"=>true,"role"=>$userRole);
+                $indexnum=$sql->first_row()->indexnumber;
+                return array("message"=>"Login Success","result"=>true,"role"=>$userRole,"indexnum"=>$indexnum);
             }else{
                 return array("message"=>"Login Failed","result"=>false);
             }
