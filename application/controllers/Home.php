@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 	}
 	public function index(){
 		$this->load->view('vw_header');
+		$this->load->view('vw_nav');
 		if($_SESSION["approle"]=="student"){
 			$this->load->view('vw_student_home');
 		}else if($_SESSION["approle"]=="admin"){

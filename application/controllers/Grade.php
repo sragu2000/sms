@@ -16,8 +16,9 @@ class Grade extends CI_Controller {
             redirect("home");
         }
 	}
-	public function add(){
+	public function manageGrade(){
 		$this->load->view('vw_header');
+		$this->load->view('vw_nav');
 		$this->load->view('vw_addGrade');
 		$this->load->view('vw_footer');
 	}
@@ -25,6 +26,31 @@ class Grade extends CI_Controller {
         $flag=$this->Mdl_grade->addGrade();
         $this->sendJson(array("message"=>$flag["message"], "result"=>$flag["result"]));
     }
+
+	public function listGradeDetails(){
+		echo $this->Mdl_grade->getGradeDetais();
+	}
+	public function editGrade($id, $grade, $coor, $paym){
+		$flag=$this->Mdl_grade->editGrade($id, $grade, $coor, $paym);
+		if($flag==true){
+			redirect("grade/manageGrade");
+		}else{
+			echo "<script>alert('Failed to edit');</script>";
+			$this->manageGrade();
+		}
+	}
+	public function deleteGrade($id){
+		$flag=$this->Mdl_grade->deleteGrade($id);
+		if($flag==true){
+			redirect("grade/manageGrade");
+		}else{
+			echo "<script>alert('Failed to delete');</script>";
+			$this->manageGrade();
+		}
+	}
+
+
+
     private function sendJson($data) {
         $this->output->set_header('Content-Type: application/json; charset=utf-8')->set_output(json_encode($data));
     }

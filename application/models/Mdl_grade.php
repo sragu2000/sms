@@ -17,4 +17,24 @@ class Mdl_grade extends CI_Model{
             }
         }
 	}
+    public function getGradeDetais()
+	{
+		$response=$this->db->query("select gradeid as id, gradename as grade, payment, coordinator from grade")->result();
+        return json_encode($response,true);
+	}
+
+    public function editGrade($id, $grade, $coor, $paym){
+        if($this->db->query("update grade set gradename='$grade', payment='$paym', coordinator='$coor' where gradeid='$id'")){
+            return true;
+        }else{
+            return false; 
+        }
+    }
+    public function deleteGrade($id){
+        if($this->db->query("delete from grade where gradeid='$id'")){
+            return true;
+        }else{
+            return false; 
+        }
+    }
 }

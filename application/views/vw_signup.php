@@ -130,6 +130,7 @@
             })
             .then(data => {
                 alert(data.message);
+                location.href="<?php echo base_url('login');?>";
             })
             .catch((e) => {
                 console.log(e);
