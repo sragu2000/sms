@@ -14,7 +14,13 @@ class Home extends CI_Controller {
 	}
 	public function index(){
 		$this->load->view('vw_header');
-		$this->load->view('vw_student_home');
+		if($_SESSION["approle"]=="student"){
+			$this->load->view('vw_student_home');
+		}else if($_SESSION["approle"]=="admin"){
+			$this->load->view('vw_admin_home');
+		}else{
+			echo "Invalid User";
+		}
 		$this->load->view('vw_footer');
 	}
 }

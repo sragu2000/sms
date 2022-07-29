@@ -4,11 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Mdl_login extends CI_Model {
     public function checkuser(){
         $indNum=$this->input->post('indnum');
-		$password=$this->input->post('password');
-        if($this->db->query("SELECT * FROM studentdetails WHERE indexnumber='$indNum'")->num_rows()==1){
-            $hpassw=$this->db->query("Select password from studentdetails where indexnumber='$indNum'")->first_row()->password;
+		    $password=$this->input->post('password');
+        $sql=$this->db->query("SELECT * FROM studentdetails WHERE indexnumber='$indNum'");
+        if($sql->num_rows()==1){
+            $hpassw=$sql->first_row()->password;
             if(password_verify($password,$hpassw)){
-                return array("message"=>"Login Success","result"=>true);
+                $userRole=$sql->first_row()->role;
+                return array("message"=>"Login Success","result"=>true,"role"=>$userRole);
             }else{
                 return array("message"=>"Login Failed","result"=>false);
             }

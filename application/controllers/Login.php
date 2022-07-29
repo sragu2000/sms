@@ -22,6 +22,7 @@ class Login extends CI_Controller {
 		$flag=$this->Mdl_login->checkuser();
 		if($flag["result"]==true){
 			$this->session->set_userdata("studentindnum",$this->input->post('indnum'));
+			$this->session->set_userdata("approle",$flag["role"]);
 		}
 		$this->sendJson(array("message"=>$flag["message"], "result"=>$flag["result"]));
 	}
