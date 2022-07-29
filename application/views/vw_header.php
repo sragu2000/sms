@@ -8,7 +8,7 @@
     <title><?php if (isset($title)) {
                 echo $title;
             } else {
-                echo "FIT";
+                echo "SMS";
             } ?></title>
     <!-- Jquery CDN -->
     <script src="<?php echo base_url('jquery/jquery-3.6.0.min.js'); ?>"></script>

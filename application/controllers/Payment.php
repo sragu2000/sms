@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Grade extends CI_Controller {
+class Payment extends CI_Controller {
     public function __construct($config="rest") {
 		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -9,6 +9,7 @@ class Grade extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Mdl_login');
 		$this->load->model('Mdl_grade');
+		$this->load->model('Mdl_payment');
 		if(! $this->Mdl_login->sessionCheck()){
 			redirect("login");
 		}
@@ -16,42 +17,24 @@ class Grade extends CI_Controller {
             redirect("home");
         }
 	}
-	public function manageGrade(){
+	public function getGradeValue($indexnum){
+		echo $this->Mdl_payment->getgrades($indexnum);
+	}
+	public function index(){
 		$this->load->view('vw_header');
 		$this->load->view('vw_nav');
-		$this->load->view('vw_addGrade');
+		$this->load->view('vw_payment');
 		$this->load->view('vw_footer');
 	}
-    public function addgrade(){
-        $flag=$this->Mdl_grade->addGrade();
+    
+    public function payCash(){
+        $flag=$this->Mdl_payment->payCash();
         $this->sendJson(array("message"=>$flag["message"], "result"=>$flag["result"]));
     }
-
-	public function listGradeDetails(){
-		echo $this->Mdl_grade->getGradeDetais();
-	}
-	public function editGrade($id, $grade, $coor, $paym){
-		$flag=$this->Mdl_grade->editGrade($id, urldecode($grade), urldecode($coor), $paym);
-		if($flag==true){
-			redirect("grade/manageGrade");
-		}else{
-			echo "<script>alert('Failed to edit');</script>";
-			$this->manageGrade();
-		}
-	}
-	public function deleteGrade($id){
-		$flag=$this->Mdl_grade->deleteGrade($id);
-		if($flag==true){
-			redirect("grade/manageGrade");
-		}else{
-			echo "<script>alert('Failed to delete');</script>";
-			$this->manageGrade();
-		}
-	}
-
-
 
     private function sendJson($data) {
         $this->output->set_header('Content-Type: application/json; charset=utf-8')->set_output(json_encode($data));
     }
+
+	
 }

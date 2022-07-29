@@ -23,14 +23,14 @@ class Mdl_login extends CI_Model {
         if (is_null($session_data)) {
           return false;
         }
-        else if (empty($session_data['studentindnum'])) {
+        else if (empty($session_data['studentmail'])) {
           return false;
         }
-        else if ($session_data['studentindnum']=="") {
+        else if ($session_data['studentmail']=="") {
           return false;
         }
         else{
-          $ses=$session_data['studentindnum'];
+          $ses=$session_data['studentmail'];
           return true;
         }
     }
