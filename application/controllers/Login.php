@@ -12,6 +12,11 @@ class Login extends CI_Controller {
 			redirect("home");
 		}
 	}
+	public function temp(){
+		$email=$this->input->post('userName');
+		$password=$this->input->post('passWord');
+		$this->sendJson(array("message"=>"Your User name is $email Your Password is $password", "result"=>true));
+	}
 	public function index()
 	{
 		$this->load->view('vw_header');
