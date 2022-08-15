@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2022 at 05:05 PM
+-- Generation Time: Aug 02, 2022 at 05:24 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -41,7 +41,7 @@ CREATE TABLE `grade` (
 INSERT INTO `grade` (`gradeid`, `gradename`, `payment`, `coordinator`) VALUES
 (1, 'Grade 6', 500, 'Ragu'),
 (2, 'Grade 7', 600, 'Mathesh'),
-(3, 'Grade 8', 800, 'Sasi');
+(3, 'Grade 8', 800, 'Peter');
 
 -- --------------------------------------------------------
 
